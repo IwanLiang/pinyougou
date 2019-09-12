@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 1. 配置Shiro过滤器工厂(拦截所有的请求) -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- 设置安全管理器 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 设置登录页面的请求URL -->
+        <property name="loginUrl" value="/login.html"/>
+        <!-- 设置过滤器链(从上而下)
+            1．user: 过滤器只要用户登录 (isRemembered()==true or isAuthenticated()==true)即可访问成功
+            2．authc: 过滤器只要用户登录isAuthenticated()==true即可访问成功
+            3．anon : 匿名访问，不需要登录
+            4．logout : 安全退出
+        -->
+        <property name="filterChainDefinitions">
+            <value>
+                /css/** = anon
+                /img/** = anon
+                /js/** = anon
+                /plugins/** = anon
+                /user/login = anon
+
+                /logout = logout
+                /** = user
+            </value>
+        </property>
+    </bean>
+
+    <!-- 2. 配置安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!-- 设置认证域 -->
+        <property name="realm" ref="iniRealm"/>
+    </bean>
+
+    <!-- 3. 配置认证域(登录信息、角色权限) -->
+    <bean id="iniRealm" class="org.apache.shiro.realm.text.IniRealm">
+        <!-- 设置ini配置文件的加载路径 -->
+        <constructor-arg name="resourcePath" value="classpath:shiro.ini"/>
+    </bean>
+
+</beans>

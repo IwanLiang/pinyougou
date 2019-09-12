@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 加载属性文件 -->
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <!--########### 配置消息消费者  ############-->
+    <bean id="mqPushConsumer" class="org.apache.rocketmq.client.consumer.DefaultMQPushConsumer"
+          init-method="start"
+          destroy-method="shutdown">
+        <!-- 设置名称服务器的连接地址 -->
+        <property name="namesrvAddr" value="${namesrvAddr}"/>
+        <!-- 设置消费者组名 -->
+        <property name="consumerGroup" value="ES_ITEM_CONSUMER"/>
+        <!-- 设置消费消息最大数量 -->
+        <property name="consumeMessageBatchMaxSize" value="1"/>
+        <!-- 设置消息模式 : CLUSTERING 集群、 BROADCASTING广播-->
+        <property name="messageModel" value="CLUSTERING"/>
+        <!-- 设置从哪里开始消费消息 -->
+        <property name="consumeFromWhere" value="CONSUME_FROM_LAST_OFFSET"/>
+        <!-- 设置订阅消息的主题与标签 -->
+        <property name="subscription">
+            <map>
+                <!-- key : 主题名称  value: 标签名称 -->
+                <entry key="ES_ITEM_TOPIC" value="*"/>
+            </map>
+        </property>
+        <!-- 设置消息监听器 -->
+        <property name="messageListener" ref="itemMessageListener"/>
+    </bean>
+
+    <!-- 配置自定义的消息监听器 -->
+    <bean id="itemMessageListener" class="com.pinyougou.search.listener.ItemMessageListener"/>
+
+</beans>

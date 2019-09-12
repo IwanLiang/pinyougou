@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd">
+
+
+    <!-- 加载属性文件 -->
+    <context:property-placeholder location="classpath:props/db.properties"/>
+
+    <!-- 导入数据库访问的配置文件 -->
+    <import resource="classpath:applicationContext-mapper.xml"/>
+
+    <!-- 配置组件扫描 -->
+    <context:component-scan base-package="com.pinyougou.es"/>
+
+    <!-- ######### 整合spring-data-elasticsearch ####### -->
+    <bean id="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+        <constructor-arg name="client" ref="client"/>
+    </bean>
+
+    <!-- 传输客户端 -->
+    <elasticsearch:transport-client id="client"
+                                    cluster-nodes="192.168.12.131:9300"
+                                    cluster-name="elasticsearch"/>
+
+    <!-- 数据访问接口包扫描 -->
+    <elasticsearch:repositories base-package="com.pinyougou.es.dao"/>
+</beans>
