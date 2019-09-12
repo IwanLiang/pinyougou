@@ -45,8 +45,13 @@ public class SellerServiceImpl implements SellerService{
     }
 
     @Override
-    public void update(Seller seller) {
-
+    public boolean update(Seller seller) {
+        try {
+            int i = sellerMapper.updateByPrimaryKeySelective(seller);
+            return i > 0;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -87,6 +92,7 @@ public class SellerServiceImpl implements SellerService{
     }
 
     /** 修改商家的审核状态 */
+    @Override
     public  void updateStatus(String sellerId, String status){
         try{
             // UPDATE tb_seller SET STATUS = ? WHERE seller_id  = ?
@@ -96,6 +102,20 @@ public class SellerServiceImpl implements SellerService{
             sellerMapper.updateByPrimaryKeySelective(seller);
         } catch (Exception ex){
             throw new RuntimeException(ex);
+        }
+    }
+
+    /**
+     * 查询回显商家数据
+     * @param id
+     * @return
+     */
+    @Override
+    public Seller show(String id) {
+        try {
+            return  sellerMapper.selectByPrimaryKey(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

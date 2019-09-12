@@ -4,10 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.pinyougou.pojo.Seller;
 import com.pinyougou.service.SellerService;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 商家控制器
@@ -42,5 +39,32 @@ public class SellerController {
         }
         return false;
     }
+    /**
+     * 回显商家数据
+     */
+    @GetMapping("/show")
+    public Seller show(String id){
+        try {
+            return sellerService.show(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 保存商家数据
+     */
+    @PostMapping("/update")
+    public boolean update(@RequestBody Seller seller){
+        try {
+            //更新保存商家数据
+            return sellerService.update(seller);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 }
