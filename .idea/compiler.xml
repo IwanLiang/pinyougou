@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="pinyougou-cart-service" />
+        <module name="pinyougou-cart-web" />
+        <module name="pinyougou-common" />
+        <module name="pinyougou-content-service" />
+        <module name="pinyougou-es-import" />
+        <module name="pinyougou-interface" />
+        <module name="pinyougou-item-web" />
+        <module name="pinyougou-manager-web" />
+        <module name="pinyougou-mapper" />
+        <module name="pinyougou-order-service" />
+        <module name="pinyougou-pay-service" />
+        <module name="pinyougou-pojo" />
+        <module name="pinyougou-portal-web" />
+        <module name="pinyougou-search-service" />
+        <module name="pinyougou-search-web" />
+        <module name="pinyougou-seckill-service" />
+        <module name="pinyougou-seckill-web" />
+        <module name="pinyougou-sellergoods-service" />
+        <module name="pinyougou-shop-web" />
+        <module name="pinyougou-sms-service" />
+        <module name="pinyougou-sms-web" />
+        <module name="pinyougou-user-service" />
+        <module name="pinyougou-user-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pinyougou-cart-service" target="1.8" />
+      <module name="pinyougou-cart-web" target="1.8" />
+      <module name="pinyougou-common" target="1.8" />
+      <module name="pinyougou-content-service" target="1.8" />
+      <module name="pinyougou-es-import" target="1.8" />
+      <module name="pinyougou-interface" target="1.8" />
+      <module name="pinyougou-item-web" target="1.8" />
+      <module name="pinyougou-manager-web" target="1.8" />
+      <module name="pinyougou-mapper" target="1.8" />
+      <module name="pinyougou-order-service" target="1.8" />
+      <module name="pinyougou-parent" target="1.8" />
+      <module name="pinyougou-pay-service" target="1.8" />
+      <module name="pinyougou-pojo" target="1.8" />
+      <module name="pinyougou-portal-web" target="1.8" />
+      <module name="pinyougou-search-service" target="1.8" />
+      <module name="pinyougou-search-web" target="1.8" />
+      <module name="pinyougou-seckill-service" target="1.8" />
+      <module name="pinyougou-seckill-web" target="1.8" />
+      <module name="pinyougou-sellergoods-service" target="1.8" />
+      <module name="pinyougou-service" target="1.8" />
+      <module name="pinyougou-shop-web" target="1.8" />
+      <module name="pinyougou-sms-service" target="1.8" />
+      <module name="pinyougou-sms-web" target="1.8" />
+      <module name="pinyougou-user-service" target="1.8" />
+      <module name="pinyougou-user-web" target="1.8" />
+      <module name="pinyougou-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
